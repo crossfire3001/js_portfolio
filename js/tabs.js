@@ -2,25 +2,22 @@ const tabButtons = document.querySelectorAll(".design-list__item");
 const tabDesc = document.querySelectorAll(".design__descr");
 const tabImages = document.querySelectorAll(".design-images");
 
-tabButtons.forEach((tabButton, index) => {
+const changeContent = (array, value) => {
+  array.forEach((element) => {
+    if (element.dataset.tabsField === value) {
+      element.classList.remove("hidden");
+    } else {
+      element.classList.add("hidden");
+    }
+  });
+};
+
+tabButtons.forEach((tabButton) => {
   tabButton.addEventListener("click", (e) => {
     const dataValue = tabButton.dataset.tabsHandler;
 
-    tabDesc.forEach((descr) => {
-      if (descr.dataset.tabsField === dataValue) {
-        descr.classList.remove("hidden");
-      } else {
-        descr.classList.add("hidden");
-      }
-    });
-
-    tabImages.forEach((image) => {
-      if (image.dataset.tabsField === dataValue) {
-        image.classList.remove("hidden");
-      } else {
-        image.classList.add("hidden");
-      }
-    });
+    changeContent(tabImages, dataValue);
+    changeContent(tabDesc, dataValue);
 
     tabButtons.forEach((btn) => {
       if (btn === e.target) {
